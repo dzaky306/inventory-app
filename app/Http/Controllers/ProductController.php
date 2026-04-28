@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function insert()
     {
         $product = Product::create([
-            'name' => 'SONIC',
+            'name' => 'alter Ego',
             'price' => 10000000,
             'stock' => 1,
             'category_id' => 2,
@@ -31,12 +31,12 @@ class ProductController extends Controller
 
     public function update()
     {
-        $product = Product::findOrFail(1);
-        $product->name = 'kinkpiniks';
+        $product = Product::findOrFail(58);
+        $product->name = 'Alter Ego';
         $product->price = 1200000;
         $product->stock = 5;
-        $product->description = 'Acer';
-        $product->status = 'tersedia';
+        $product->description = 'Runner up M-Series';
+        $product->status = 'habis';
         $product->save();
 
         dd($product);
@@ -44,7 +44,7 @@ class ProductController extends Controller
 
     public function delete()
     {
-        $product = Product::findOrFail(56);
+        $product = Product::findOrFail(60);
         $product->delete();
 
         dd('Produk telah dihapus');
