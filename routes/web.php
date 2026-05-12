@@ -7,7 +7,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/insert', [ProductController::class, 'insert'])->name('insert');
-Route::get('/update', [ProductController::class, 'update'])->name('update');
-Route::get('/delete', [ProductController::class, 'delete'])->name('delete');
+Route::post('/insert', [ProductController::class, 'store'])->name('insert.store');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
