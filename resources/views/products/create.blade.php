@@ -116,7 +116,7 @@
                         
                         <div class="d-flex justify-content-end gap-3 mt-4">
 
-                            <a href="/products" class="btn btn-secondary btn-lg px-4">
+                            <a href="{{ route('products.index') }}" class="btn btn-secondary btn-lg px-4">
                                 Kembali
                             </a>
 
