@@ -14,10 +14,16 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run()
-{
-    $this->call(CategorySeeder::class);
+    {
+        $this->call(CategorySeeder::class);
 
-    // Tambahkan 50 produk acuan
-    \App\Models\Product::factory(50)->create();
-}
+        User::factory()->create([
+            'name' => 'dzaky',
+            'email' => 'dmubarok@example.com',
+            'password' => '12345678',
+        ]);
+
+        // Tambahkan 50 produk acuan
+        \App\Models\Product::factory(50)->create();
+    }
 }

@@ -17,6 +17,8 @@ class ProductController extends Controller
 
     public function insert()
     {
+        $this->authorizeAdmin();
+
         $categories = Category::all();
 
         return view('products.create', compact('categories'));
@@ -24,6 +26,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorizeAdmin();
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
@@ -41,6 +45,8 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        $this->authorizeAdmin();
+
         $categories = Category::all();
 
         return view('products.edit', compact('product', 'categories'));
@@ -48,6 +54,8 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        $this->authorizeAdmin();
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
@@ -65,6 +73,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        $this->authorizeAdmin();
+
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus.');

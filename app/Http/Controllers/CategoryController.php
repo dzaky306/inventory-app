@@ -18,11 +18,15 @@ class CategoryController extends Controller
 
     public function create(): View
     {
+        $this->authorizeAdmin();
+
         return view('categories.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
+        $this->authorizeAdmin();
+
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
         ]);
@@ -34,11 +38,15 @@ class CategoryController extends Controller
 
     public function edit(Category $category): View
     {
+        $this->authorizeAdmin();
+
         return view('categories.edit', compact('category'));
     }
 
     public function update(Request $request, Category $category): RedirectResponse
     {
+        $this->authorizeAdmin();
+
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
         ]);
@@ -50,6 +58,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category): RedirectResponse
     {
+        $this->authorizeAdmin();
+
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus.');

@@ -7,9 +7,13 @@
     </div>
 @endif
 
-<div class="mb-4">
-    <h1 class="mb-3">Daftar Barang Inventaris</h1>
-    <a href="{{ route('insert') }}" class="btn btn-primary">Tambah Data</a>
+<div class="mb-4 d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
+    <div>
+        <h1 class="mb-3">Daftar Barang Inventaris</h1>
+    </div>
+    @if(auth()->user()->is_admin)
+        <a href="{{ route('insert') }}" class="btn btn-primary">Tambah Data</a>
+    @endif
 </div>
 
 <table class="table table-striped">
@@ -43,12 +47,16 @@
     @endif
 </td>
 <td class="text-end">
-    <a href="{{ route('products.edit', $p) }}" class="btn btn-sm btn-outline-primary me-1">Edit</a>
-    <form action="{{ route('products.destroy', $p) }}" method="POST" class="d-inline">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus produk ini?')">Hapus</button>
-    </form>
+    @if(auth()->user()->is_admin)
+        <a href="{{ route('products.edit', $p) }}" class="btn btn-sm btn-outline-primary me-1">Edit</a>
+        <form action="{{ route('products.destroy', $p) }}" method="POST" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus produk ini?')">Hapus</button>
+        </form>
+    @else
+        -
+    @endif
 </td>
 </tr>
 @empty

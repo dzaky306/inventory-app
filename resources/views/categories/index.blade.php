@@ -6,7 +6,9 @@
         <h1 class="mb-2">Daftar Kategori</h1>
         <p class="text-muted mb-0">Kelola kategori produk inventaris Anda.</p>
     </div>
-    <a href="{{ route('categories.create') }}" class="btn btn-primary">Tambah Kategori</a>
+    @if(auth()->user()->is_admin)
+        <a href="{{ route('categories.create') }}" class="btn btn-primary">Tambah Kategori</a>
+    @endif
 </div>
 
 @if(session('success'))
@@ -30,12 +32,16 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $category->name }}</td>
                             <td class="text-end">
-                                <a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
-                                <form action="{{ route('categories.destroy', $category) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus kategori ini?')">Hapus</button>
-                                </form>
+                                @if(auth()->user()->is_admin)
+                                    <a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                                    <form action="{{ route('categories.destroy', $category) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus kategori ini?')">Hapus</button>
+                                    </form>
+                                @else
+                                    -
+                                @endif
                             </td>
                         </tr>
                     @empty
